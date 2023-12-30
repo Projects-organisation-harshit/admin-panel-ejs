@@ -2,6 +2,7 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const connection = require("./utils/database");
 const eventsRoutes = require("./routes/eventsRoutes");
+const homeRoutes = require("./routes/homeRoutes");
 const app = express();
 
 connection.connect((err) => {
@@ -14,11 +15,7 @@ app.set("view engine", "ejs");
 
 //routes
 app.use("/events", eventsRoutes);
-app.use("/", (req, res) => {
-  console.log("home");
-
-  res.send("home");
-});
+app.use("/", homeRoutes);
 
 app.listen(8000, () => {
   console.log("app running on port 8000");

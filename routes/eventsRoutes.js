@@ -26,10 +26,12 @@ router.post("/add", (req, res) => {
 router.get("/delete/:id", (req, res) => {
   const userId = req.params.id;
   const deleteQuery = "DELETE FROM events WHERE id = ?";
+
   connection.query(deleteQuery, [userId], (err, results) => {
     if (err) throw err;
     res.redirect("/events");
   });
+  connection.query("ALTER TABLE events AUTO_INCREMENT = 1;");
 });
 
 router.get("/edit/:id", (req, res) => {
