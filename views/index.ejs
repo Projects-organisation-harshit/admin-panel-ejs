@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js Admin Panel</title>
+  </head>
+  <body>
+    <h1>User List</h1>
+    <ul>
+      <% data.forEach(event => { %>
+      <li>
+        <%= event.id %> - <%= event.title %> <%= event.description %> - <%=
+        event.address %> - <%= event.city %> - <%= event.date %> |
+        <a href="/edit/<%= event.id %>">Edit</a> |
+        <a href="/delete/<%= event.id %>">Delete</a>
+      </li>
+      <% }); %>
+    </ul>
+
+    <h2>Add User</h2>
+    <form action="/add" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" required />
+      <label for="email">Email:</label>
+      <input type="email" name="email" required />
+      <button type="submit">Add User</button>
+    </form>
+  </body>
+</html>
