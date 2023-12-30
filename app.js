@@ -9,6 +9,9 @@ connection.connect((err) => {
   console.log("connected to database");
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+
 //routes
 app.use("/events", eventsRoutes);
 app.use("/", (req, res) => {
@@ -16,9 +19,6 @@ app.use("/", (req, res) => {
 
   res.send("home");
 });
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
 
 app.listen(8000, () => {
   console.log("app running on port 8000");
