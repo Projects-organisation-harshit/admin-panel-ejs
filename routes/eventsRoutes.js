@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   connection.query("SELECT * FROM events", (err, results) => {
     if (err) throw err;
     console.log(results);
-    res.render("index", { data: results });
+    res.render("indexEvent", { data: results });
   });
 });
 
@@ -37,7 +37,7 @@ router.get("/edit/:id", (req, res) => {
   const selectQuery = "SELECT * FROM events WHERE id = ?";
   connection.query(selectQuery, [userId], (err, results) => {
     if (err) throw err;
-    res.render("edit", { event: results[0] });
+    res.render("editEvent", { event: results[0] });
   });
 });
 
