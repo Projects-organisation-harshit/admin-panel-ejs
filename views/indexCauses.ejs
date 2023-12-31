@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js Admin Panel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 5px;
+        color: #333;
+        background-color: #ddd;
+        border-radius: 5px;
+      }
+
+      a:hover {
+        background-color: #ccc;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 8px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Causes List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Raised Money</th>
+          <th>Goal</th>
+          <th>Photo URL</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% causes.forEach(cause => { %>
+        <tr>
+          <td><%= cause.id %></td>
+          <td><%= cause.title %></td>
+          <td><%= cause.raised_money %></td>
+          <td><%= cause.goal %></td>
+          <td><%= cause.photourl %></td>
+          <td>
+            <a href="/causes/edit/<%= cause.id %>">Edit</a>
+            <a href="/causes/delete/<%= cause.id %>">Delete</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h2>Add Cause</h2>
+    <form action="/causes/add" method="post">
+      <label for="title">Title:</label>
+      <input type="text" name="title" required />
+
+      <label for="raised_money">Raised Money:</label>
+      <input type="number" name="raised_money" required />
+
+      <label for="goal">Goal:</label>
+      <input type="number" name="goal" required />
+
+      <label for="photourl">Photo URL:</label>
+      <input type="text" name="photourl" />
+
+      <button type="submit">Add Cause</button>
+    </form>
+  </body>
+</html>
