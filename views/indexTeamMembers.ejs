@@ -1,0 +1,141 @@
+<!-- views/indexTeamMembers.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js Admin Panel</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      h1,
+      h2 {
+        color: #333;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 5px;
+        color: #333;
+        background-color: #ddd;
+        border-radius: 5px;
+      }
+
+      a:hover {
+        background-color: #ccc;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input {
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 8px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Team Members List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Photo URL</th>
+          <th>Date of Joining</th>
+          <th>Role</th>
+          <th>Email</th>
+          <th>Phone Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% teamMembers.forEach(member => { %>
+        <tr>
+          <td><%= member.id %></td>
+          <td><%= member.first_name %></td>
+          <td><%= member.last_name %></td>
+          <td><%= member.photoUrl %></td>
+          <td><%= member.date_of_joining %></td>
+          <td><%= member.role %></td>
+          <td><%= member.email %></td>
+          <td><%= member.phone_number %></td>
+          <td>
+            <a href="/team_members/edit/<%= member.id %>">Edit</a>
+            <a href="/team_members/delete/<%= member.id %>">Delete</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <h2>Add Team Member</h2>
+    <form action="/team_members/add" method="post">
+      <label for="first_name">First Name:</label>
+      <input type="text" name="first_name" required />
+
+      <label for="last_name">Last Name:</label>
+      <input type="text" name="last_name" required />
+
+      <label for="photoUrl">Photo URL:</label>
+      <input type="text" name="photoUrl" />
+
+      <label for="role">Role:</label>
+      <input type="text" name="role" required />
+
+      <label for="email">Email:</label>
+      <input type="email" name="email" required />
+
+      <label for="phone_number">Phone Number:</label>
+      <input type="text" name="phone_number" required />
+
+      <label for="date_of_joining">Date of Joining:</label>
+      <input type="date" name="date_of_joining" required />
+
+      <button type="submit">Add Team Member</button>
+    </form>
+  </body>
+</html>
