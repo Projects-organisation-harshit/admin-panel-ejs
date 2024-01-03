@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/database");
+const formatDate = require("../utils/formatDate");
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM events", (err, results) => {
@@ -39,7 +40,15 @@ router.get("/edit/:id", (req, res) => {
   const selectQuery = "SELECT * FROM events WHERE id = ?";
   connection.query(selectQuery, [userId], (err, results) => {
     if (err) throw err;
-    res.render("editEvent", { event: results[0] });
+
+    const formattedResults = results.map((result) => {
+      return {
+        ...result,
+        date: formatDate(result.date),
+      };
+    });
+
+    res.render("editEvent", { event: formattedResults[0] });
   });
 });
 
