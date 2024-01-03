@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/database");
+const formatDate = require("../utils/formatDate");
 
 router.get("/", (req, res) => {
   const sqlQuery = "select * from news";
@@ -41,9 +42,32 @@ router.get("/edit/:id", (req, res) => {
   const selectQuery = "SELECT * FROM news WHERE id = ?";
   connection.query(selectQuery, [id], (err, results) => {
     if (err) throw err;
-    res.render("editNews", { news: results[0] });
+
+    // Format the date before rendering the template
+    const formattedResults = results.map((result) => {
+      return {
+        ...result,
+        date: formatDate(result.date),
+      };
+    });
+
+    res.render("editNews", { news: formattedResults[0] });
   });
 });
+
+// // Helper function to format the date
+// function formatDate(dateString) {
+//   const dateObject = new Date(dateString);
+//   const year = dateObject.getFullYear();
+//   let month = dateObject.getMonth() + 1;
+//   let day = dateObject.getDate();
+
+//   // Add leading zero if needed
+//   month = month < 10 ? `0${month}` : month;
+//   day = day < 10 ? `0${day}` : day;
+
+//   return `${year}-${month}-${day}`;
+// }
 
 router.post("/update/:id", (req, res) => {
   const id = req.params.id;
