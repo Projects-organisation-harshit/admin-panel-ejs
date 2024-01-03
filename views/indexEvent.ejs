@@ -113,6 +113,8 @@
       <input type="text" name="city" required />
       <label for="state">State:</label>
       <input type="text" name="state" required />
+      <label for="photo_url">Photo url:</label>
+      <input type="text" name="photo_url" required />
       <label for="date">Date:</label>
       <input type="date" name="date" required />
       <button type="submit">Add Event</button>
@@ -127,6 +129,7 @@
           <th>Address</th>
           <th>City</th>
           <th>State</th>
+          <th>Photo url</th>
           <th>Date</th>
           <th>Actions</th>
         </tr>
@@ -140,6 +143,14 @@
           <td><%= event.address %></td>
           <td><%= event.city %></td>
           <td><%= event.state %></td>
+          <td>
+            <img
+              src="<%= event.photo_url %>"
+              height="100"
+              width="100"
+              alt="not loading"
+            />
+          </td>
           <td><%= event.date %></td>
           <td>
             <a
