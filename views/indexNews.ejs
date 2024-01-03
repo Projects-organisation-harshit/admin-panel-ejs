@@ -140,7 +140,14 @@
           <td><%= news.id %></td>
           <td><%= news.title %></td>
           <td><%= news.description %></td>
-          <td><%= news.photourl %></td>
+          <td>
+            <img
+              src="<%= news.photourl %>"
+              height="100"
+              width="100"
+              alt="not loading"
+            />
+          </td>
           <td><%= news.articlelink %></td>
           <td><%= news.date %></td>
           <td>

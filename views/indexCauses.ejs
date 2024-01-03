@@ -145,7 +145,14 @@
           <td><%= cause.description %></td>
           <td><%= cause.raised_money %></td>
           <td><%= cause.goal %></td>
-          <td><%= cause.photourl %></td>
+          <td>
+            <img
+              src="<%= cause.photourl %>"
+              height="100"
+              width="100"
+              alt="not loading"
+            />
+          </td>
           <td>
             <a
               href="/causes/edit/<%= cause.id %>"

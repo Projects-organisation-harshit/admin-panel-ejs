@@ -132,7 +132,14 @@
           <td><%= event.id %></td>
           <td><%= event.year %></td>
           <td><%= event.title %></td>
-          <td><%= event.photourl %></td>
+          <td>
+            <img
+              src="<%= event.photourl %>"
+              height="100"
+              width="100"
+              alt="not loading"
+            />
+          </td>
           <td><%= event.description %></td>
           <td>
             <a
