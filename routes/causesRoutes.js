@@ -11,11 +11,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-  const { title, raised_money, goal, photourl } = req.body;
-  const insertQuery = `INSERT INTO causes (title, raised_money, goal, photourl) VALUES (?, ?, ? , ?)`;
+  const { title, description, raised_money, goal, photourl } = req.body;
+  const insertQuery = `INSERT INTO causes (title, description,raised_money, goal, photourl) VALUES (?, ?, ? , ?,?)`;
   connection.query(
     insertQuery,
-    [title, raised_money, goal, photourl],
+    [title, description, raised_money, goal, photourl],
     (err, results) => {
       if (err) throw err;
       res.redirect("/causes");
@@ -45,12 +45,12 @@ router.get("/edit/:id", (req, res) => {
 
 router.post("/update/:id", (req, res) => {
   const Id = req.params.id;
-  const { title, raised_money, goal, photourl } = req.body;
+  const { title, description, raised_money, goal, photourl } = req.body;
   const updateQuery =
-    "UPDATE causes SET title = ?, raised_money = ?, goal = ?, photourl = ? WHERE id = ?";
+    "UPDATE causes SET title = ?, description=?,raised_money = ?, goal = ?, photourl = ? WHERE id = ?";
   connection.query(
     updateQuery,
-    [title, raised_money, goal, photourl, Id],
+    [title, description, raised_money, goal, photourl, Id],
     (err, results) => {
       if (err) throw err;
       res.redirect("/causes");
