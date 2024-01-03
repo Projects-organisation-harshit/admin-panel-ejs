@@ -8,7 +8,8 @@
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin: 20px;
-        background-color: #fff;
+        background-color: #f8f8f8;
+
         color: #000;
       }
 
@@ -53,6 +54,7 @@
 
       form {
         margin-top: 20px;
+        display: none;
       }
 
       label {
@@ -83,10 +85,42 @@
       }
     </style>
   </head>
+
   <body>
     <button style="background-color: black">
       <a href="/" style="background-color: black">home</a>
     </button>
+
+    <h2
+      onclick="toggleFormVisibility()"
+      style="
+        background-color: #f13c4a;
+        width: max-content;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: medium;
+        cursor: pointer;
+      "
+    >
+      Add Data
+    </h2>
+    <form action="/causes/add" method="post">
+      <label for="title">Title:</label>
+      <input type="text" name="title" required />
+
+      <label for="raised_money">Raised Money:</label>
+      <input type="number" name="raised_money" required />
+
+      <label for="goal">Goal:</label>
+      <input type="number" name="goal" required />
+
+      <label for="photourl">Photo URL:</label>
+      <input type="text" name="photourl" />
+
+      <button type="submit">Add Cause</button>
+    </form>
+
     <h1>Causes List</h1>
     <table>
       <thead>
@@ -108,29 +142,32 @@
           <td><%= cause.goal %></td>
           <td><%= cause.photourl %></td>
           <td>
-            <a href="/causes/edit/<%= cause.id %>">Edit</a>
-            <a href="/causes/delete/<%= cause.id %>">Delete</a>
+            <a
+              href="/causes/edit/<%= cause.id %>"
+              style="background-color: rgb(86, 86, 255)"
+              >Edit</a
+            >
+            <a
+              href="/causes/delete/<%= cause.id %>"
+              style="background-color: #d1323f"
+              >Delete</a
+            >
           </td>
         </tr>
         <% }); %>
       </tbody>
     </table>
-
-    <h2>Add Cause</h2>
-    <form action="/causes/add" method="post">
-      <label for="title">Title:</label>
-      <input type="text" name="title" required />
-
-      <label for="raised_money">Raised Money:</label>
-      <input type="number" name="raised_money" required />
-
-      <label for="goal">Goal:</label>
-      <input type="number" name="goal" required />
-
-      <label for="photourl">Photo URL:</label>
-      <input type="text" name="photourl" />
-
-      <button type="submit">Add Cause</button>
-    </form>
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add Data" : "Cancel";
+      }
+    </script>
   </body>
 </html>

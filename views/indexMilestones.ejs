@@ -8,7 +8,7 @@
       body {
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         margin: 20px;
-        background-color: #fff;
+        background-color: #f8f8f8;
         color: #000;
       }
 
@@ -53,6 +53,7 @@
 
       form {
         margin-top: 20px;
+        display: none;
       }
 
       label {
@@ -87,6 +88,32 @@
     <button style="background-color: black">
       <a href="/" style="background-color: black">home</a>
     </button>
+
+    <h2
+      onclick="toggleFormVisibility()"
+      style="
+        background-color: #f13c4a;
+        width: max-content;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: medium;
+        cursor: pointer;
+      "
+    >
+      Add Data
+    </h2>
+    <form action="/milestones/add" method="post">
+      <label for="year">Year:</label>
+      <input type="number" name="year" required />
+      <label for="title">Title:</label>
+      <input type="text" name="title" required />
+      <label for="photourl">Photourl:</label>
+      <input type="text" name="photourl" required />
+      <label for="description">Description:</label>
+      <input type="text" name="description" required />
+      <button type="submit">Add Milestone</button>
+    </form>
     <h1>Milestones List</h1>
     <table>
       <thead>
@@ -108,25 +135,33 @@
           <td><%= event.photourl %></td>
           <td><%= event.description %></td>
           <td>
-            <a href="/milestones/edit/<%= event.id %>">Edit</a>
-            <a href="/milestones/delete/<%= event.id %>">Delete</a>
+            <a
+              href="/milestones/edit/<%= event.id %>"
+              style="background-color: rgb(86, 86, 255)"
+              >Edit</a
+            >
+            <a
+              href="/milestones/delete/<%= event.id %>"
+              style="background-color: #d1323f"
+              >Delete</a
+            >
           </td>
         </tr>
         <% }); %>
       </tbody>
     </table>
 
-    <h2>Add Milestone</h2>
-    <form action="/milestones/add" method="post">
-      <label for="year">Year:</label>
-      <input type="text" name="year" required />
-      <label for="title">Title:</label>
-      <input type="text" name="title" required />
-      <label for="photourl">Photourl:</label>
-      <input type="text" name="photourl" required />
-      <label for="description">Description:</label>
-      <input type="text" name="description" required />
-      <button type="submit">Add Milestone</button>
-    </form>
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add Data" : "Cancel";
+      }
+    </script>
   </body>
 </html>

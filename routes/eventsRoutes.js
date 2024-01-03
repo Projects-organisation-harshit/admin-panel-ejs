@@ -12,11 +12,11 @@ router.get("/", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-  const { title, description, address, city, date } = req.body;
-  const insertQuery = `INSERT INTO events (title, description, address, city, date) VALUES (?, ?, ? , ?, ? )`;
+  const { title, description, address, city, state, date } = req.body;
+  const insertQuery = `INSERT INTO events (title, description, address, city, state,date) VALUES (?, ?, ? , ?, ? , ?)`;
   connection.query(
     insertQuery,
-    [title, description, address, city, date],
+    [title, description, address, city, state, date],
     (err, results) => {
       if (err) throw err;
       res.redirect("/events");
@@ -54,12 +54,12 @@ router.get("/edit/:id", (req, res) => {
 
 router.post("/update/:id", (req, res) => {
   const eventId = req.params.id;
-  const { title, description, address, city, date } = req.body;
+  const { title, description, address, city, state, date } = req.body;
   const updateQuery =
-    "UPDATE events SET title = ?, description = ?, address = ?, city = ?, date = ? WHERE id = ?";
+    "UPDATE events SET title = ?, description = ?, address = ?, city = ?, state = ?,date = ? WHERE id = ?";
   connection.query(
     updateQuery,
-    [title, description, address, city, date, eventId],
+    [title, description, address, city, state, date, eventId],
     (err, results) => {
       if (err) throw err;
       res.redirect("/events");
