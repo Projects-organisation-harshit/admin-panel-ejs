@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit User</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: rgb(229, 229, 229);
+        margin: 0;
+        padding: 20px;
+        color: white;
+      }
+
+      h1 {
+        color: #ff5555;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      form {
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #ff5555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ff5555;
+        border-radius: 4px;
+        background-color: rgb(229, 229, 229);
+        color: black;
+      }
+
+      button {
+        background-color: #ff5555;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #ff3333;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Edit User</h1>
+    <form action="/user/update/<%= user.user_id %>" method="post">
+      <label for="username">Username:</label>
+      <input
+        type="text"
+        name="username"
+        value="<%= user.username || '' %>"
+        required
+      />
+
+      <label for="password">Password:</label>
+      <input
+        type="text"
+        name="password"
+        value="<%= user.password || '' %>"
+        required
+      />
+      <label for="email">Email:</label>
+      <input
+        type="text"
+        name="email"
+        value="<%= user.email || '' %>"
+        required
+      />
+
+      <label for="full_name">Full Name:</label>
+      <input
+        type="text"
+        name="full_name"
+        value="<%= user.full_name || '' %>"
+        required
+      />
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" value="<%= user.address || '' %>" />
+
+      <label for="city">City:</label>
+      <input type="text" name="city" value="<%= user.city || '' %>" />
+
+      <label for="state">State:</label>
+      <input type="text" name="state" value="<%= user.state || '' %>" />
+
+      <label for="pin_code">Pin Code:</label>
+      <input type="text" name="pin_code" value="<%= user.pin_code || '' %>" />
+
+      <label for="phone_number">Phone Number:</label>
+      <input
+        type="text"
+        name="phone_number"
+        value="<%= user.phone_number || '' %>"
+      />
+
+      <button type="submit">Update User</button>
+      <button style="margin-top: 10px; background-color: #777777">
+        <a href="/users" style="text-decoration: none; color: white">Go back</a>
+      </button>
+    </form>
+  </body>
+</html>

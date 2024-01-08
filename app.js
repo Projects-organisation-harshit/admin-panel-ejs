@@ -7,6 +7,7 @@ const newsRoutes = require("./routes/newsRoutes");
 const causesRoutes = require("./routes/causesRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const milestonesRoutes = require("./routes/milestonesRoutes");
+const userRoutes = require("./routes/userRoutes");
 const app = express();
 
 connection.connect((err) => {
@@ -18,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 //routes
-
+app.use("/user", userRoutes);
 app.use("/milestones", milestonesRoutes);
 app.use("/team_members", teamRoutes);
 app.use("/causes", causesRoutes);

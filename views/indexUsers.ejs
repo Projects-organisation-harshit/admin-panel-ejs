@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js User Panel</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f8f8f8;
+
+        color: #000;
+      }
+
+      h1,
+      h2 {
+        color: #f13c4a;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f13c4a;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 8px;
+        color: #fff;
+        background-color: #f13c4a;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      a:hover {
+        background-color: #d1323f;
+      }
+
+      form {
+        margin-top: 20px;
+        display: none;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #000;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #f13c4a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #d1323f;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button style="background-color: black">
+      <a href="/" style="background-color: black">home</a>
+    </button>
+
+    <h2
+      onclick="toggleFormVisibility()"
+      style="
+        background-color: #f13c4a;
+        width: max-content;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: medium;
+        cursor: pointer;
+      "
+    >
+      Add User
+    </h2>
+    <form action="/user/register" method="post">
+      <label for="username">Username:</label>
+      <input type="text" name="username" required />
+
+      <label for="email">Email:</label>
+      <input type="text" name="email" required />
+
+      <label for="full_name">Full Name:</label>
+      <input type="text" name="full_name" required />
+
+      <label for="address">Address:</label>
+      <input type="text" name="address" />
+
+      <label for="city">City:</label>
+      <input type="text" name="city" />
+
+      <label for="state">State:</label>
+      <input type="text" name="state" />
+
+      <label for="pin_code">Pin Code:</label>
+      <input type="text" name="pin_code" />
+
+      <label for="phone_number">Phone Number:</label>
+      <input type="text" name="phone_number" />
+
+      <button type="submit">Add User</button>
+    </form>
+
+    <h1>Users List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>Email</th>
+          <th>Full Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Pin Code</th>
+          <th>Phone Number</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach(user => { %>
+        <tr>
+          <td><%= user.user_id %></td>
+          <td><%= user.username %></td>
+          <td><%= user.password %></td>
+          <td><%= user.email %></td>
+          <td><%= user.full_name %></td>
+          <td><%= user.address %></td>
+          <td><%= user.city %></td>
+          <td><%= user.state %></td>
+          <td><%= user.pin_code %></td>
+          <td><%= user.phone_number %></td>
+          <td>
+            <a
+              href="/user/edit/<%= user.user_id %>"
+              style="background-color: rgb(86, 86, 255)"
+              >Edit</a
+            >
+            <a
+              href="/user/delete/<%= user.user_id %>"
+              style="background-color: #d1323f"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add User" : "Cancel";
+      }
+    </script>
+  </body>
+</html>
