@@ -1,5 +1,6 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const session = require("express-session");
 const connection = require("./utils/database");
 const eventsRoutes = require("./routes/eventsRoutes");
 const homeRoutes = require("./routes/homeRoutes");
@@ -17,6 +18,7 @@ connection.connect((err) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(session({ secret: "sectet", resave: true, saveUninitialized: true }));
 
 //routes
 app.use("/user", userRoutes);

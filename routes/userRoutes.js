@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/database");
+const bcrypt = require("bcrypt");
 
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM users", (err, results) => {
@@ -10,7 +11,7 @@ router.get("/", (req, res) => {
   });
 });
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
   const {
     username,
     email,
@@ -22,6 +23,9 @@ router.post("/register", (req, res) => {
     phone_number,
     password,
   } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const insertQuery = `INSERT INTO users (username, email, full_name, address, city, state, pin_code, phone_number,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
   connection.query(
     insertQuery,
@@ -34,7 +38,7 @@ router.post("/register", (req, res) => {
       state,
       pin_code,
       phone_number,
-      password,
+      hashedPassword,
     ],
     (err, results) => {
       if (err) throw err;
@@ -63,7 +67,7 @@ router.get("/edit/:id", (req, res) => {
   });
 });
 
-router.post("/update/:id", (req, res) => {
+router.post("/update/:id", async (req, res) => {
   const userId = req.params.id;
   const {
     username,
@@ -76,6 +80,9 @@ router.post("/update/:id", (req, res) => {
     phone_number,
     password,
   } = req.body;
+
+  const hashedPassword = await bcrypt.hash(password, 10);
+
   const updateQuery =
     "UPDATE users SET username = ?, email = ?, full_name = ?, address = ?, city = ?, state = ?, pin_code = ?, phone_number = ?, password = ? WHERE user_id = ?";
   connection.query(
@@ -89,7 +96,7 @@ router.post("/update/:id", (req, res) => {
       state,
       pin_code,
       phone_number,
-      password,
+      hashedPassword,
       userId,
     ],
     (err, results) => {
