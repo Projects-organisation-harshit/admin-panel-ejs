@@ -121,8 +121,9 @@
           <th>ID</th>
           <th>Year</th>
           <th>Title</th>
-          <th>Photourl</th>
           <th>Description</th>
+          <th>Photourl</th>
+
           <th>Actions</th>
         </tr>
       </thead>
@@ -132,6 +133,8 @@
           <td><%= event.id %></td>
           <td><%= event.year %></td>
           <td><%= event.title %></td>
+
+          <td><%= event.description %></td>
           <td>
             <img
               src="<%= event.photourl %>"
@@ -140,7 +143,6 @@
               alt="not loading"
             />
           </td>
-          <td><%= event.description %></td>
           <td>
             <a
               href="/milestones/edit/<%= event.id %>"

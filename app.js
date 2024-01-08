@@ -18,12 +18,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 //routes
+
 app.use("/milestones", milestonesRoutes);
 app.use("/team_members", teamRoutes);
 app.use("/causes", causesRoutes);
 app.use("/news", newsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/", homeRoutes);
+app.use("*", (req, res) => {
+  res.render("404");
+});
 
 app.listen(8000, () => {
   console.log("app running on port 8000");

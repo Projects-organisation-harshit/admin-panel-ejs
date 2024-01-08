@@ -48,6 +48,7 @@ router.get("/delete/:id", (req, res) => {
     if (err) throw err;
     res.redirect("/team_members");
   });
+  connection.query("ALTER TABLE team_members AUTO_INCREMENT = 1;");
 });
 
 router.get("/edit/:id", (req, res) => {
