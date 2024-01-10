@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
     if (err) throw err;
     console.log(results);
     res.render("indexEvent", { data: results });
+    // res.send(results);
   });
 });
 
@@ -57,6 +58,7 @@ router.post("/update/:id", (req, res) => {
   const eventId = req.params.id;
   const { title, description, address, city, state, date, photo_url } =
     req.body;
+
   const updateQuery =
     "UPDATE events SET title = ?, description = ?, address = ?, city = ?, state = ?,date = ? , photo_url=? WHERE id = ?";
   connection.query(

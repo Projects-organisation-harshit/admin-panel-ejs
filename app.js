@@ -9,6 +9,7 @@ const causesRoutes = require("./routes/causesRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const milestonesRoutes = require("./routes/milestonesRoutes");
 const userRoutes = require("./routes/userRoutes");
+const cors = require("cors");
 const app = express();
 
 connection.connect((err) => {
@@ -16,8 +17,10 @@ connection.connect((err) => {
   console.log("connected to database");
 });
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
+app.use(express.json());
 app.use(session({ secret: "sectet", resave: true, saveUninitialized: true }));
 
 //routes

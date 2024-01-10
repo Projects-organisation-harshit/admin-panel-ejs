@@ -22,29 +22,35 @@ router.post("/register", async (req, res) => {
     pin_code,
     phone_number,
     password,
-  } = req.body;
+  } = await req.body;
+
+  console.log(req.body);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const insertQuery = `INSERT INTO users (username, email, full_name, address, city, state, pin_code, phone_number,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-  connection.query(
-    insertQuery,
-    [
-      username,
-      email,
-      full_name,
-      address,
-      city,
-      state,
-      pin_code,
-      phone_number,
-      hashedPassword,
-    ],
-    (err, results) => {
-      if (err) throw err;
-      res.redirect("/user");
-    }
-  );
+  try {
+    const insertQuery = `INSERT INTO users (username, email, full_name, address, city, state, pin_code, phone_number,password) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    connection.query(
+      insertQuery,
+      [
+        username,
+        email,
+        full_name,
+        address,
+        city,
+        state,
+        pin_code,
+        phone_number,
+        hashedPassword,
+      ],
+      (err, results) => {
+        if (err) throw err;
+        res.redirect("/user");
+      }
+    );
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.get("/delete/:id", (req, res) => {
