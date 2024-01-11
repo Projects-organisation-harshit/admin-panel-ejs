@@ -6,7 +6,11 @@ router.get("/", (req, res) => {
   connection.query("SELECT * FROM causes", (err, results) => {
     if (err) throw err;
     console.log(results);
-    res.render("indexCauses", { causes: results });
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      res.send(results);
+    } else {
+      res.render("indexCauses", { causes: results });
+    }
   });
 });
 

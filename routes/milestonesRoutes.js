@@ -5,8 +5,13 @@ const connection = require("../utils/database");
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM milestones", (err, results) => {
     if (err) throw err;
-    console.log(results);
-    res.render("indexMilestones", { data: results });
+    // console.log(results);
+    console.log(req.headers.accept);
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      res.send(results);
+    } else {
+      res.render("indexMilestones", { data: results });
+    }
   });
 });
 

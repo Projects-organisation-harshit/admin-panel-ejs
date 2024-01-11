@@ -77,13 +77,20 @@
       <label for="raised_money">Raised Money:</label>
       <input
         type="number"
+        step="any"
         name="raised_money"
         value="<%= causes.raised_money %>"
         required
       />
 
       <label for="goal">Goal:</label>
-      <input type="number" name="goal" value="<%= causes.goal %>" required />
+      <input
+        type="number"
+        name="goal"
+        step="any"
+        value="<%= causes.goal %>"
+        required
+      />
 
       <label for="photourl">Photo URL:</label>
       <input type="text" name="photourl" value="<%= causes.photourl %>" />

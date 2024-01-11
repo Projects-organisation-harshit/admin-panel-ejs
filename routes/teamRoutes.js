@@ -7,7 +7,11 @@ router.get("/", (req, res) => {
   connection.query("SELECT * FROM team_members", (err, results) => {
     if (err) throw err;
     console.log(results);
-    res.render("indexTeamMembers", { teamMembers: results });
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      res.send(results);
+    } else {
+      res.render("indexTeamMembers", { teamMembers: results });
+    }
   });
 });
 

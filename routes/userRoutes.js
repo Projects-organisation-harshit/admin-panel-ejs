@@ -132,9 +132,10 @@ router.post("/login", (req, res) => {
 
       if (user && bcrypt.compareSync(password, user.password)) {
         req.session.userId = user.id;
-        res.render("success", { user: user });
+
+        res.send({ message: "success", user: user });
       } else {
-        res.redirect("/user/login");
+        res.send({ message: "password dont match" });
       }
     }
   );
