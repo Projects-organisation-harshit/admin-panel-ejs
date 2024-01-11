@@ -10,19 +10,26 @@ const teamRoutes = require("./routes/teamRoutes");
 const milestonesRoutes = require("./routes/milestonesRoutes");
 const userRoutes = require("./routes/userRoutes");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const app = express();
 
 connection.connect((err) => {
   if (err) throw err;
   console.log("connected to database");
 });
-
-app.use(cors());
+app.use(cookieParser());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.json());
-app.use(session({ secret: "sectet", resave: true, saveUninitialized: true }));
-
+app.use(
+  session({
+    secret: "your-secret-key",
+    resave: false,
+    saveUninitialized: true,
+    cookie: { sameSite: "strict", secure: false },
+  })
+);
 //routes
 app.use("/user", userRoutes);
 app.use("/milestones", milestonesRoutes);

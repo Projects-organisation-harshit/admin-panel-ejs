@@ -113,7 +113,18 @@ router.post("/update/:id", async (req, res) => {
 });
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  try {
+    // console.log(req.session.user);
+    console.log(req.session.user);
+
+    if (req.session.user) {
+      res.send({ session: req.session.user });
+    } else {
+      res.send({ session: null });
+    }
+  } catch (error) {
+    res.send(err);
+  }
 });
 
 router.post("/login", (req, res) => {
@@ -125,13 +136,15 @@ router.post("/login", (req, res) => {
     (err, results) => {
       if (err) {
         console.error("Error querying database:", err);
-        return res.redirect("/user/login");
+        return res.send("error");
       }
 
       const user = results[0];
 
       if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.userId = user.id;
+        req.session.user = user.username;
+        req.session.save();
+        console.log(req.session.user);
 
         res.send({ message: "success", user: user });
       } else {
