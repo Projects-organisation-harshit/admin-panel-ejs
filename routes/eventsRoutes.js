@@ -7,7 +7,11 @@ router.get("/", (req, res) => {
   connection.query("SELECT * FROM events", (err, results) => {
     if (err) throw err;
     console.log(results);
-    res.render("indexEvent", { data: results });
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      res.send(results);
+    } else {
+      res.render("indexEvent", { data: results });
+    }
     // res.send(results);
   });
 });
