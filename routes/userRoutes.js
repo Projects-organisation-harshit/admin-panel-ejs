@@ -129,6 +129,7 @@ router.get("/login", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
+  console.log("login");
 
   connection.query(
     "SELECT * FROM users WHERE username = ?",
@@ -142,9 +143,9 @@ router.post("/login", (req, res) => {
       const user = results[0];
 
       if (user && bcrypt.compareSync(password, user.password)) {
-        req.session.user = user.username;
+        req.session.user = user;
         req.session.save();
-        console.log(req.session.user);
+        console.log(req.session.cookie);
 
         res.send({ message: "success", user: user });
       } else {
@@ -152,6 +153,14 @@ router.post("/login", (req, res) => {
       }
     }
   );
+});
+
+router.get("/logout", async (req, res) => {
+  console.log("Before destroying session:", req.session);
+  await req.session.destroy();
+
+  console.log("After destroying session:", req.session);
+  res.send("Logged out");
 });
 
 module.exports = router;

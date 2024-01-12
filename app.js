@@ -9,6 +9,7 @@ const causesRoutes = require("./routes/causesRoutes");
 const teamRoutes = require("./routes/teamRoutes");
 const milestonesRoutes = require("./routes/milestonesRoutes");
 const userRoutes = require("./routes/userRoutes");
+const contactusRoutes = require("./routes/contactRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -31,6 +32,7 @@ app.use(
   })
 );
 //routes
+app.use("/contactus", contactusRoutes);
 app.use("/user", userRoutes);
 app.use("/milestones", milestonesRoutes);
 app.use("/team_members", teamRoutes);

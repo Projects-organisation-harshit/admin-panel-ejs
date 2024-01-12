@@ -7,7 +7,11 @@ router.get("/", (req, res) => {
   const sqlQuery = "select * from news";
   connection.query(sqlQuery, (err, results) => {
     if (err) throw err;
-    res.render("indexNews.ejs", { news: results });
+    if (req.headers.accept && req.headers.accept.includes("application/json")) {
+      res.send(results);
+    } else {
+      res.render("indexNews.ejs", { news: results });
+    }
   });
 });
 

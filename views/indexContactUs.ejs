@@ -91,7 +91,7 @@
     <button style="background-color: black">
       <a href="/" style="background-color: black">home</a>
     </button>
-    <h2
+    <!-- <h2
       onclick="toggleFormVisibility()"
       style="
         background-color: #f13c4a;
@@ -105,65 +105,37 @@
     >
       Add Data
     </h2>
-    <form action="/news/add" method="post">
-      <label for="title">Title:</label>
-      <input type="text" name="title" required />
+    <form action="/contactus/add" method="post">
+      <label for="name">Name:</label>
+      <input type="text" name="name" required />
 
-      <label for="description">Description:</label>
-      <input type="text" name="description" required />
+      <label for="email">Email:</label>
+      <input type="email" name="email" required />
 
-      <label for="photourl">Photo URL:</label>
-      <input type="text" name="photourl" />
+      <label for="message">Message:</label>
+      <textarea name="message" required></textarea>
 
-      <label for="articlelink">Article Link:</label>
-      <input type="text" name="articlelink" required />
-
-      <label for="date">Date:</label>
-      <input type="date" name="date" required />
-
-      <button type="submit">Add News</button>
-    </form>
-    <h1>News List</h1>
+      <button type="submit">Submit Message</button>
+    </form> -->
+    <h1>Contact Us Messages</h1>
     <table>
       <thead>
         <tr>
           <th>ID</th>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Photo URL</th>
-          <th>Article Link</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Message</th>
           <th>Date</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <% news.forEach(news => { %>
+        <% contactus.forEach(message => { %>
         <tr>
-          <td><%= news.id %></td>
-          <td><%= news.title %></td>
-          <td><%= news.description %></td>
-          <td>
-            <img
-              src="<%= news.photourl %>"
-              height="100"
-              width="100"
-              alt="not loading"
-            />
-          </td>
-          <td><%= news.articlelink %></td>
-          <td><%= news.date %></td>
-          <td>
-            <a
-              href="/news/edit/<%= news.id %>"
-              style="background-color: rgb(86, 86, 255)"
-              >Edit</a
-            >
-            <a
-              href="/news/delete/<%= news.id %>"
-              style="background-color: #d1323f"
-              >Delete</a
-            >
-          </td>
+          <td><%= message.id %></td>
+          <td><%= message.name %></td>
+          <td><%= message.email %></td>
+          <td><%= message.message %></td>
+          <td><%= message.date %></td>
         </tr>
         <% }); %>
       </tbody>
