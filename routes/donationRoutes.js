@@ -14,6 +14,27 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/:username", (req, res) => {
+  const username = req.params.username;
+
+  connection.query(
+    "SELECT * FROM Donations where username=?",
+    [username],
+    (err, results) => {
+      if (err) throw err;
+      console.log(results);
+      if (
+        req.headers.accept &&
+        req.headers.accept.includes("application/json")
+      ) {
+        res.send(results);
+      } else {
+        res.render("indexDonations", { data: results });
+      }
+    }
+  );
+});
+
 router.post("/add", (req, res) => {
   const { username, Amount, Donation_Date } = req.body;
   const insertQuery = `INSERT INTO Donations (username, Amount, Donation_Date) VALUES (?, ?, ?)`;
