@@ -15,14 +15,14 @@ router.get("/", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
-  const { username, amount, donation_date } = req.body;
-  const insertQuery = `INSERT INTO Donations (username, amount, donation_date) VALUES (?, ?, ?)`;
+  const { username, Amount, Donation_Date } = req.body;
+  const insertQuery = `INSERT INTO Donations (username, Amount, Donation_Date) VALUES (?, ?, ?)`;
   connection.query(
     insertQuery,
-    [username, amount, donation_date],
+    [username, Amount, Donation_Date],
     (err, results) => {
       if (err) throw err;
-      res.redirect("/donations");
+      res.send("done");
     }
   );
 });
