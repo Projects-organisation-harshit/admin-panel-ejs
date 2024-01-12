@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Node.js Admin Panel</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f8f8f8;
+        color: #000;
+      }
+
+      h1,
+      h2 {
+        color: #f13c4a;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 12px;
+        text-align: left;
+        max-width: 100px;
+        overflow: auto;
+      }
+
+      th {
+        background-color: #f13c4a;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 8px;
+        color: #fff;
+        background-color: #f13c4a;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      a:hover {
+        background-color: #d1323f;
+      }
+
+      form {
+        display: none;
+
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #000;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #f13c4a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #d1323f;
+      }
+    </style>
+  </head>
+  <body>
+    <button style="background-color: black">
+      <a href="/" style="background-color: black">Home</a>
+    </button>
+
+    <h1>Donations List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Amount</th>
+          <th>Donation Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% data.forEach(donation => { %>
+        <tr>
+          <td><%= donation.id %></td>
+          <td><%= donation.username %></td>
+          <td><%= donation.amount %></td>
+          <td><%= donation.donation_date %></td>
+          <td></td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add Data" : "Cancel";
+      }
+    </script>
+  </body>
+</html>
