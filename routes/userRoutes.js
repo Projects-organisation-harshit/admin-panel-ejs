@@ -44,8 +44,11 @@ router.post("/register", async (req, res) => {
         hashedPassword,
       ],
       (err, results) => {
-        if (err) throw err;
-        res.redirect("/user");
+        if (err) {
+          res.send({ message: "fail" });
+        } else {
+          res.send({ message: "success" });
+        }
       }
     );
   } catch (error) {
