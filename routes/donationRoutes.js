@@ -15,6 +15,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/:username", (req, res) => {
+  2024;
   const username = req.params.username;
 
   connection.query(

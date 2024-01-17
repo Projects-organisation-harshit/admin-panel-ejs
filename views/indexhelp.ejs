@@ -1,0 +1,172 @@
+<!-- views/indexHelp.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f8f8f8;
+        color: #000;
+      }
+
+      h1,
+      h2 {
+        color: #f13c4a;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f13c4a;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 8px;
+        color: #fff;
+        background-color: #f13c4a;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      a:hover {
+        background-color: #d1323f;
+      }
+
+      form {
+        margin-top: 20px;
+        display: none;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #000;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #f13c4a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #d1323f;
+      }
+    </style>
+  </head>
+  <body>
+    <button style="background-color: black">
+      <a href="/" style="background-color: black">Home</a>
+    </button>
+
+    <h2
+      onclick="toggleFormVisibility()"
+      style="
+        background-color: #f13c4a;
+        width: max-content;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: medium;
+        cursor: pointer;
+      "
+    >
+      Add Data
+    </h2>
+    <form action="/help/add" method="post">
+      <label for="photo_url">Photo URL:</label>
+      <input type="text" name="photo_url" />
+
+      <label for="heading">Heading:</label>
+      <input type="text" name="heading" required />
+
+      <label for="description">Description:</label>
+      <input type="text" name="description" required />
+
+      <button type="submit">Add Data</button>
+    </form>
+    <h1>Help List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Photo URL</th>
+          <th>Heading</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% helpData.forEach(item => { %>
+        <tr>
+          <td><%= item.id %></td>
+          <td>
+            <img
+              src="<%= item.photourl %>"
+              height="100"
+              width="100"
+              alt="not loading"
+            />
+          </td>
+          <td><%= item.title %></td>
+          <td><%= item.descr %></td>
+          <td>
+            <a
+              href="/help/edit/<%= item.id %>"
+              style="background-color: rgb(86, 86, 255)"
+              >Edit</a
+            >
+            <a
+              href="/help/delete/<%= item.id %>"
+              style="background-color: #d1323f"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add Data" : "Cancel";
+      }
+    </script>
+  </body>
+</html>

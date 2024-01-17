@@ -10,6 +10,7 @@ const teamRoutes = require("./routes/teamRoutes");
 const milestonesRoutes = require("./routes/milestonesRoutes");
 const userRoutes = require("./routes/userRoutes");
 const contactusRoutes = require("./routes/contactRoutes");
+const helpRoutes = require("./routes/helpRoutes");
 const donationsRoutes = require("./routes/donationRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -41,6 +42,7 @@ app.use("/team_members", teamRoutes);
 app.use("/causes", causesRoutes);
 app.use("/news", newsRoutes);
 app.use("/events", eventsRoutes);
+app.use("/help", helpRoutes);
 app.use("/", homeRoutes);
 app.use("*", (req, res) => {
   res.render("404");

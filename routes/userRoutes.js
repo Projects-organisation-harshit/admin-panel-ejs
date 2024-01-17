@@ -117,8 +117,8 @@ router.post("/update/:id", async (req, res) => {
 
 router.get("/login", (req, res) => {
   try {
-    // console.log(req.session.user);
-    console.log(req.session.user);
+    console.log(req.session.id, "get");
+    // console.log(req.session.user, );
 
     if (req.session.user) {
       res.send({ session: req.session.user });
@@ -148,7 +148,7 @@ router.post("/login", (req, res) => {
       if (user && bcrypt.compareSync(password, user.password)) {
         req.session.user = user;
         req.session.save();
-        console.log(req.session.cookie);
+        console.log(req.session.id, "post");
 
         res.send({ message: "success", user: user });
       } else {

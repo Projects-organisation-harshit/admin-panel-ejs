@@ -16,6 +16,25 @@ router.get("/", (req, res) => {
   });
 });
 
+router.get("/latest", (req, res) => {
+  connection.query(
+    "SELECT * FROM events ORDER BY date ASC LIMIT 1;",
+    (err, results) => {
+      if (err) throw err;
+      console.log(results);
+      if (
+        req.headers.accept &&
+        req.headers.accept.includes("application/json")
+      ) {
+        res.send(results);
+      } else {
+        res.render("indexEvent", { data: results });
+      }
+      // res.send(results);
+    }
+  );
+});
+
 router.post("/add", (req, res) => {
   const { title, description, address, city, state, date, photo_url } =
     req.body;
