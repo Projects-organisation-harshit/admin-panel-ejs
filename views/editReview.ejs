@@ -61,25 +61,37 @@
     </style>
   </head>
   <body>
-    <h1>Edit Help</h1>
-    <form action="/help/update/<%= help.id %>" method="post">
-      <label for="title">Title:</label>
-      <input type="text" name="title" value="<%= help.title %>" required />
-
-      <label for="descr">Description:</label>
-      <input type="text" name="descr" value="<%= help.descr %>" required />
-
-      <label for="photourl">Photo url:</label>
+    <h1>Edit Review</h1>
+    <form action="/reviews/update/<%= review.review_id %>" method="post">
+      <label for="employee_id">Employee ID:</label>
       <input
         type="text"
-        name="photourl"
-        value="<%= help.photourl %>"
+        name="employee_id"
+        value="<%= review.employee_id || '' %>"
         required
       />
 
-      <button type="submit">Update Help</button>
+      <label for="review_text">Review Text:</label>
+      <input
+        type="text"
+        name="review_text"
+        value="<%= review.review_text || '' %>"
+        required
+      />
+
+      <label for="review_date">Review Date:</label>
+      <input
+        type="date"
+        name="review_date"
+        value="<%= review.review_date || '' %>"
+        required
+      />
+
+      <button type="submit">Update Review</button>
       <button style="margin-top: 10px; background-color: #777777">
-        <a href="/help" style="text-decoration: none; color: white">Go back</a>
+        <a href="/reviews" style="text-decoration: none; color: white"
+          >Go back</a
+        >
       </button>
     </form>
   </body>

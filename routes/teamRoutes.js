@@ -6,7 +6,7 @@ const formatDate = require("../utils/formatDate");
 router.get("/", (req, res) => {
   connection.query("SELECT * FROM team_members", (err, results) => {
     if (err) throw err;
-    console.log(results);
+    // console.log(results);
     if (req.headers.accept && req.headers.accept.includes("application/json")) {
       res.send(results);
     } else {

@@ -12,6 +12,7 @@ const userRoutes = require("./routes/userRoutes");
 const contactusRoutes = require("./routes/contactRoutes");
 const helpRoutes = require("./routes/helpRoutes");
 const donationsRoutes = require("./routes/donationRoutes");
+const reviewsRoutes = require("./routes/reviewRoutes");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
@@ -43,6 +44,7 @@ app.use("/causes", causesRoutes);
 app.use("/news", newsRoutes);
 app.use("/events", eventsRoutes);
 app.use("/help", helpRoutes);
+app.use("/reviews", reviewsRoutes);
 app.use("/", homeRoutes);
 app.use("*", (req, res) => {
   res.render("404");

@@ -1,0 +1,187 @@
+<!-- views/indexreviews.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 20px;
+        background-color: #f8f8f8;
+        color: #000;
+      }
+
+      h1,
+      h2 {
+        color: #f13c4a;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        border: 1px solid #000;
+        max-width: 100px;
+        padding: 12px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f13c4a;
+        color: white;
+      }
+
+      a {
+        text-decoration: none;
+        margin-left: 10px;
+        padding: 8px;
+        color: #fff;
+        background-color: #f13c4a;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      a:hover {
+        background-color: #d1323f;
+      }
+
+      form {
+        margin-top: 20px;
+        display: none;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        color: #000;
+      }
+
+      input {
+        padding: 8px;
+        margin-bottom: 12px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      button {
+        padding: 12px;
+        background-color: #f13c4a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #d1323f;
+      }
+      .styled-dropdown {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ff5555;
+        border-radius: 4px;
+        background-color: rgb(229, 229, 229);
+        color: black;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <button style="background-color: black">
+      <a href="/" style="background-color: black">Home</a>
+    </button>
+
+    <h2
+      onclick="toggleFormVisibility()"
+      style="
+        background-color: #f13c4a;
+        width: max-content;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        font-size: medium;
+        cursor: pointer;
+      "
+    >
+      Add Review
+    </h2>
+    <form action="/reviews/add" method="post">
+      <label for="employee_id">Employee ID:</label>
+      <select name="employee_id" class="styled-dropdown">
+        <% eData.forEach(item => { %>
+        <option value="<%= item.id %>"><%= item.id %></option>
+        <% }); %>
+      </select>
+
+      <label for="review_text">Review Text:</label>
+      <input type="text" name="review_text" required />
+
+      <label for="review_date">Review Date:</label>
+      <input type="date" name="review_date" required />
+
+      <button type="submit">Add Review</button>
+    </form>
+    <h1>Review List</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Employee ID</th>
+          <th>Review Text</th>
+          <th>Review Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% reviewsData.forEach(item => { %>
+        <tr>
+          <td><%= item.review_id %></td>
+          <td><%= item.employee_id %></td>
+          <td><%= item.review_text %></td>
+          <td><%= item.review_date %></td>
+          <td>
+            <a
+              href="/reviews/edit/<%= item.review_id %>"
+              style="background-color: rgb(86, 86, 255)"
+              >Edit</a
+            >
+            <a
+              href="/reviews/delete/<%= item.review_id %>"
+              style="background-color: #d1323f"
+              >Delete</a
+            >
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <script>
+      function toggleFormVisibility() {
+        var form = document.getElementsByTagName("form")[0];
+        form.style.display = form.style.display === "none" ? "block" : "none";
+        changeValue();
+      }
+      function changeValue() {
+        var form = document.getElementsByTagName("form")[0];
+        var val = document.getElementsByTagName("h2")[0];
+        val.innerText = form.style.display === "none" ? "Add Review" : "Cancel";
+      }
+      //   function getCurrentDate() {
+      //     var today = new Date();
+      //     var dd = String(today.getDate()).padStart(2, "0");
+      //     var mm = String(today.getMonth() + 1).padStart(2, "0"); // January is 0!
+      //     var yyyy = today.getFullYear();
+
+      //     return yyyy + "-" + mm + "-" + dd;
+      //   }
+    </script>
+  </body>
+</html>
