@@ -153,7 +153,6 @@
           <th>State</th>
           <th>Pin Code</th>
           <th>Phone Number</th>
-          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -169,18 +168,6 @@
           <td><%= user.state %></td>
           <td><%= user.pin_code %></td>
           <td><%= user.phone_number %></td>
-          <td>
-            <a
-              href="/user/edit/<%= user.user_id %>"
-              style="background-color: rgb(86, 86, 255)"
-              >Edit</a
-            >
-            <a
-              href="/user/delete/<%= user.user_id %>"
-              style="background-color: #d1323f"
-              >Delete</a
-            >
-          </td>
         </tr>
         <% }); %>
       </tbody>
